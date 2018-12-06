@@ -8,16 +8,50 @@ html {
 body {
     font-family: 'Open Sans', 'Trebuchet MS', Verdana, Arial, Helvetica, sans-serif;
     text-rendering: optimizeLegibility;
-    color: #555555;
+    color: #E87363;
+    background: #B4D0B7;
 }
 .container-fluid.but-fixed {
     max-width: 1230px;
 }
-
-.get-started {
-    animation: blinkingText 1.5s infinite;
-}
-@keyframes blinkingText{
-    10% { opacity: .5; }
+@keyframes blink {
     50% { opacity: 0; }
+}
+.get-started {
+    animation: blink 1.5s ease-in infinite;
+}
+h1 {
+    font-family: "Monoton", "Roboto Slab", cursive;
+    font-size: 3rem;
+    letter-spacing: 3px;
+}
+h3{
+    font-family: "Roboto Slab", cursive;
+    letter-spacing: 1px;
+}
+.letter-display {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+}
+.letter-display div {
+    min-width: 40px;
+    height: 40px;
+    margin: 5px;
+    line-height: 40px;
+    text-transform: uppercase;
+    font-family: "Roboto Slab", cursive;
+    border-radius: 3px;
+    background: #E87363;
+    color: #fff;
+}
+.letter-display .selected {
+    line-height: 38px;
+    background-color: transparent;
+    border: 1px solid #E87363;
+    color: #E87363;
 }
