@@ -1,0 +1,23 @@
+/* ----------------------------------------------------------------------------
+    Project Styles
+----------------------------------------------------------------------------- */
+html {
+    min-height: 100%;
+    position: relative;
+}
+body {
+    font-family: 'Open Sans', 'Trebuchet MS', Verdana, Arial, Helvetica, sans-serif;
+    text-rendering: optimizeLegibility;
+    color: #555555;
+}
+.container-fluid.but-fixed {
+    max-width: 1230px;
+}
+
+.get-started {
+    animation: blinkingText 1.5s infinite;
+}
+@keyframes blinkingText{
+    10% { opacity: .5; }
+    50% { opacity: 0; }
+}
