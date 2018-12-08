@@ -72,7 +72,7 @@ function checkLetter(letter) {
             document.querySelector('.remaining-guesses').innerHTML = guesses;
             //console.log(guessedLetters);
             if (guesses === 0) {
-                // adding setTimeout to allow the user to see the last letter added to the answer
+                // adding setTimeout to allow the user to see the last letter guessed
                 // is there a better way to do this?
                 setTimeout(function() {
                     alert("YOU LOSE!");
@@ -87,7 +87,7 @@ function checkLetter(letter) {
 }
 
 document.onkeyup = function(event) {
-    // checking if it's a new game, if not dont initialize game on onkeyup
+    // checking if it's a new game, if not don't initialize the game on onkeyup
     if (newGame) {
         gameInit();
     }
