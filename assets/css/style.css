@@ -11,6 +11,9 @@ body {
     color: #E87363;
     background: #B4D0B7;
 }
+.container {
+    max-width: 1200px;
+}
 .container-fluid.but-fixed {
     max-width: 1230px;
 }
@@ -29,11 +32,50 @@ h3{
     font-family: "Roboto Slab", cursive;
     letter-spacing: 1px;
 }
-.letter-display {
+.game-container {
+    font-family: "Roboto Slab", cursive;
+}
+.current-word {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+}
+.current-word div.letter {
+    min-width: 50px;
+    min-height: 40px;
+    margin: 5px;
+    line-height: 40px;
+    text-transform: uppercase;
+    font-size: 1.7em;
+    font-family: "Roboto Slab", cursive;
+    border-radius: 3px;
+    background: transparent;
+    color: #E87363;
+    position: relative;
+}
+.current-word div:after {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: #E87363;
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-radius: 5px;
+}
+.game-stats {
+    font-size: 1.2em;
+}
+.letter-display {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 2em 0 0 0;
     padding: 0;
     list-style: none;
     text-align: center;
@@ -49,7 +91,7 @@ h3{
     background: #E87363;
     color: #fff;
 }
-.letter-display .selected {
+.letter-display .guessed {
     line-height: 38px;
     background-color: transparent;
     border: 1px solid #E87363;
