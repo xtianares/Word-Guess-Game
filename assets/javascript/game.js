@@ -1,10 +1,11 @@
 const wordList = ['Awkward', 'Bagpipes', 'Banjo', 'Bungler', 'Croquet', 'Crypt', 'Dwarves', 'Fervid', 'Fishhook', 'Gazebo', 'Gypsy', 'Haiku', 'Hyphen', 'Ivory', 'Jazzy', 'Jiffy', 'Jinx', 'Jukebox', 'Zombie'];
 
 let wins = 0,
-    guesses = 7,
+    guesses = 10,
     theWord = "",
     charCount = "",
-    newWord = true;
+    newGame = true,
+    guessedLetters = [];
 
 // function to select and display current word
 function currentWord() {
@@ -16,26 +17,57 @@ function currentWord() {
     document.querySelector('.current-word').innerHTML = charCount;
 }
 function gameInit() {
+    currentWord();
     document.querySelector('#start-wrap').style.display = 'none';
     document.querySelector('#game-wrap').style.display = 'flex';
     document.querySelector('.remaining-guesses').innerHTML = guesses;
     document.querySelector('.win-count').innerHTML = wins;
-    currentWord();
+    let letterDivs = document.querySelectorAll('.letter-display div');
+    for(var i = 0; i < letterDivs.length; i++) {
+        letterDivs[i].classList.remove("guessed");
+    }
 }
 function reset() {
     wins = 0,
     guesses = 7,
     theWord = "",
     charCount = "",
-    newGame = true;
+    newGame = true,
+    guessedLetters = [];
     gameInit();
+}
+function selectedLetter(letter) {
+    let letterDivs = document.querySelectorAll('.letter-display div');
+    if (guessedLetters.indexOf(letter) < 0) {
+        guessedLetters.push(letter);
+        for(var i = 0; i < letterDivs.length; i++) {
+            if (letterDivs[i].id == letter) {
+                letterDivs[i].classList.add("guessed");
+            }
+        }
+        guesses -= 1;
+    }
+    document.querySelector('.remaining-guesses').innerHTML = guesses;
+    console.log(guessedLetters);
+    if (guesses === 0) {
+        alert("YOU LOSE!");
+        reset();
+    }
 }
 
 document.onkeyup = function(event) {
-    if (newWord) {
+    if (newGame) {
         gameInit();
     }
-    newWord = false;
-
-
+    newGame = false;
+    // Check if letter key
+    let charCode = event.keyCode;
+    let letter = String.fromCharCode(charCode).toLowerCase();
+    if (/[a-zA-Z]/i.test(letter)) {
+ 		//console.log("Letter: " + letter);
+        selectedLetter(letter);
+    }
+    else {
+        alert("Press a letter!");
+    }
 }
