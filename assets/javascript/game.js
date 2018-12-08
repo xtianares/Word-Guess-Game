@@ -3,7 +3,8 @@ const wordList = ['Awkward', 'Bagpipes', 'Banjo', 'Bungler', 'Croquet', 'Crypt',
 let wins = 0,
     guesses = 7,
     theWord = "",
-    charCount = "";
+    charCount = "",
+    newWord = true;
 
 // function to select and display current word
 function currentWord() {
@@ -16,10 +17,25 @@ function currentWord() {
 }
 function gameInit() {
     document.querySelector('#start-wrap').style.display = 'none';
+    document.querySelector('#game-wrap').style.display = 'flex';
     document.querySelector('.remaining-guesses').innerHTML = guesses;
+    document.querySelector('.win-count').innerHTML = wins;
     currentWord();
+}
+function reset() {
+    wins = 0,
+    guesses = 7,
+    theWord = "",
+    charCount = "",
+    newGame = true;
+    gameInit();
 }
 
 document.onkeyup = function(event) {
-    gameInit();
+    if (newWord) {
+        gameInit();
+    }
+    newWord = false;
+
+
 }

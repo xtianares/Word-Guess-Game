@@ -35,6 +35,9 @@ h3{
 .game-container {
     font-family: "Roboto Slab", cursive;
 }
+#game-wrap {
+    display: none;
+}
 .current-word {
     display: flex;
     flex-wrap: wrap;
