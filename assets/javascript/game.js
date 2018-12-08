@@ -3,24 +3,30 @@ const wordList = ['Awkward', 'Bagpipes', 'Banjo', 'Bungler', 'Croquet', 'Crypt',
 let wins = 0,
     guesses = 10,
     theWord = "",
-    charCount = "",
+    charDiv = "",
     newGame = true,
-    guessedLetters = [];
+    guessedLetters = [],
+    correctLetters = [];
 
 let letterDivs = document.querySelectorAll('.letter-display div');
 
 // function to select and display current word
 function currentWord() {
     theWord = wordList[Math.floor(Math.random() * wordList.length)];
-    //theWord = "monster";
+    //theWord = "speeds"; // word use for testing
     theWord = theWord.toLowerCase();
 	console.log("The Word is: " + theWord);
     for(var i = 0; i < theWord.length; i++) {
-    	charCount += '<div class="letter"></div>';
+    	charDiv += '<div class="letter"></div>';
     }
-    document.querySelector('.current-word').innerHTML = charCount;
+    document.querySelector('.current-word').innerHTML = charDiv;
 }
 function gameInit() {
+    guesses = 10,
+    theWord = "",
+    charDiv = "",
+    guessedLetters = [],
+    correctLetters = [];
     currentWord();
     document.querySelector('#start-wrap').style.display = 'none';
     document.querySelector('#game-wrap').style.display = 'flex';
@@ -33,10 +39,11 @@ function gameInit() {
     newGame = false;
 }
 function checkLetter(letter) {
+    // checking if the guessed letter hevnt been guesed yet
     if (guessedLetters.indexOf(letter) < 0) {
         guessedLetters.push(letter);
         for(var i = 0; i < letterDivs.length; i++) {
-            if (letterDivs[i].id == letter) {
+            if (letterDivs[i].textContent == letter) {
                 letterDivs[i].classList.add("guessed");
             }
         }
@@ -44,41 +51,52 @@ function checkLetter(letter) {
         for(var i = 0; i < theWord.length; i++) {
             if (theWord.charAt(i) === letter) {
                 currentWordDivs[i].innerHTML = letter;
-                console.log("Letter in word: " + theWord.charAt(i));
+                correctLetters.push(letter);
+                //console.log("Letter in word: " + theWord.charAt(i));
             }
         }
-        if (theWord.indexOf(letter) < 0) {
-            guesses = guesses - 1;
+        // tracking number of wins
+        if (theWord.length === correctLetters.length) {
+            wins++;
+            document.querySelector('.win-count').innerHTML = wins;
+            // adding setTimeout to allow the user to see the last letter added to the answer
+            // is there a better way to do this?
+            setTimeout(function() {
+                alert("YOU WIN!");
+                gameInit();
+            }, 50);
         }
-        document.querySelector('.remaining-guesses').innerHTML = guesses;
-        //console.log(guessedLetters);
-        if (guesses === 0) {
-            alert("YOU LOSE!");
-            reset();
+        // tracking number of guesses left
+        if (theWord.indexOf(letter) < 0) {
+            guesses--;
+            document.querySelector('.remaining-guesses').innerHTML = guesses;
+            //console.log(guessedLetters);
+            if (guesses === 0) {
+                // adding setTimeout to allow the user to see the last letter added to the answer
+                // is there a better way to do this?
+                setTimeout(function() {
+                    alert("YOU LOSE!");
+                    gameInit();
+                }, 50);
+            }
         }
     }
+    else {
+        alert("You already tried that letter!")
+    }
 }
-function reset() {
-    wins = 0,
-    guesses = 10,
-    theWord = "",
-    charCount = "",
-    newGame = true,
-    guessedLetters = [];
-    gameInit();
-}
-
 
 document.onkeyup = function(event) {
+    // checking if it's a new game, if not dont initialize game on onkeyup
     if (newGame) {
         gameInit();
     }
     else {
-        // Check if letter key
+        // Check if the key is a letter
         let charCode = event.keyCode;
         let letter = String.fromCharCode(charCode).toLowerCase();
         if (/[a-zA-Z]/i.test(letter)) {
-     		//console.log("Letter: " + letter);
+            //console.log("Letter: " + letter);
             checkLetter(letter);
         }
         else {
