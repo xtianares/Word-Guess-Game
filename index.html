@@ -17,7 +17,7 @@
     <div class="container-fluid but-fixed">
         <div class="row justify-content-center">
             <div class="col-lg-10 text-center mt-5">
-                <h1>Word Guess Game</h1>
+                <h1>Guess the US State</h1>
             </div>
         </div>
     </div>
@@ -31,16 +31,23 @@
             </div>
         </div>
         <div id="game-wrap" class="row justify-content-center">
-            <div class="col-md-10 col-lg-7 text-center mt-5">
+            <div class="col-md-10 col-lg-10 text-center mt-3">
                 <div class="game-container">
-                    <div class="word-container mb-5">
+                    <div class="word-container mb-3">
                         <div class="current-word">
                             <!-- current word will be displayed here -->
                         </div>
                     </div>
-                    <div class="game-stats text-center">
+                    <div class="need-hint">
+                        <p><a id="show-hint" href="#">Need a hint?</a></p>
+                        <p class="the-hint">This state's capital is <span class="capital"></span></span></p>
+                    </div>
+                    <div class="game-stats text-center mt-4">
                         <p class="guesses">Guesses Remaining: <span class="remaining-guesses"></span></p>
-                        <p class="wins">Wins: <span class="win-count"></span></p>
+                        <p class="wins">
+                            <span class="game-status">Wins: <span class="win-count"></span></span>
+                            <span class="game-status">Losses: <span class="loss-count"></span></span>
+                        </p>
                     </div>
                     <div class="letter-display">
                         <div>a</div>

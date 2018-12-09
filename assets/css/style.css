@@ -10,6 +10,11 @@ body {
     text-rendering: optimizeLegibility;
     color: #E87363;
     background: #B4D0B7;
+    /* background-image: url(../images/us-map.jpg);
+    background-size: cover;
+    background-position: 50% 50%;
+    background-attachment: fixed; */
+    overflow-y: scroll;
 }
 .container {
     max-width: 1200px;
@@ -48,7 +53,7 @@ h3{
     text-align: center;
 }
 .current-word div.letter {
-    min-width: 50px;
+    min-width: 30px;
     min-height: 45px;
     margin: 5px;
     line-height: 40px;
@@ -71,23 +76,50 @@ h3{
     left: 0;
     border-radius: 5px;
 }
+.current-word div.letter.space {
+    min-width: 10px;
+}
+.current-word div.letter.space:after {
+    display: none;
+}
+.need-hint {
+    display: none;
+    font-size: 1.2em;
+}
+.need-hint a {
+    color: inherit;
+}
+.need-hint .the-hint {
+    display: none;
+}
 .game-stats {
     font-size: 1.2em;
+}
+.game-status {
+    display: inline-block;
+    margin: 0 20px;
+}
+.win-count, .loss-count {
+    display: inline-block;
+    width: 20px;
+    text-align: center;
+    border-bottom: 1px solid #E87363;
 }
 .letter-display {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 2em 0 0 0;
+    max-width: 550px;
+    margin: 2em auto;
     padding: 0;
     list-style: none;
     text-align: center;
 }
 .letter-display div {
-    min-width: 40px;
-    height: 40px;
+    min-width: 30px;
+    height: 30px;
     margin: 5px;
-    line-height: 40px;
+    line-height: 30px;
     text-transform: uppercase;
     font-family: "Roboto Slab", cursive;
     border-radius: 3px;
@@ -95,7 +127,7 @@ h3{
     color: #fff;
 }
 .letter-display .guessed {
-    line-height: 38px;
+    line-height: 28px;
     background-color: transparent;
     border: 1px solid #E87363;
     color: #E87363;
