@@ -14,7 +14,7 @@ let letterDivs = document.querySelectorAll('.letter-display div');
 function currentWord() {
     theWord = wordList[Math.floor(Math.random() * wordList.length)];
     //theWord = "speeds"; // word use for testing
-    theWord = theWord.toLowerCase();
+    theWord = theWord.toUpperCase();
 	console.log("The Word is: " + theWord);
     for(var i = 0; i < theWord.length; i++) {
     	charDiv += '<div class="letter"></div>';
@@ -94,7 +94,8 @@ document.onkeyup = function(event) {
     else {
         // Check if the key is a letter
         let charCode = event.keyCode;
-        let letter = String.fromCharCode(charCode).toLowerCase();
+        let letter = String.fromCharCode(charCode).toUpperCase();
+        // using regex to check if the key pressed is a letter
         if (/[a-zA-Z]/i.test(letter)) {
             //console.log("Letter: " + letter);
             checkLetter(letter);
