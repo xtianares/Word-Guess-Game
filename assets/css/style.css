@@ -10,10 +10,10 @@ body {
     text-rendering: optimizeLegibility;
     color: #E87363;
     background: #B4D0B7;
-    /* background-image: url(../images/us-map.jpg);
+    background-image: url(../images/us-map.jpg);
     background-size: cover;
     background-position: 50% 50%;
-    background-attachment: fixed; */
+    background-attachment: fixed;
     overflow-y: scroll;
 }
 .container {
@@ -29,7 +29,7 @@ body {
     animation: blink 1.5s ease-in infinite;
 }
 h1 {
-    font-family: "Monoton", "Roboto Slab", cursive;
+    font-family: Fruktur,Pacifico, "Kumar One Outline", "Roboto Slab", cursive;
     font-size: 3rem;
     letter-spacing: 3px;
 }
@@ -105,12 +105,34 @@ h3{
     text-align: center;
     border-bottom: 1px solid #E87363;
 }
+.available-letters {
+    margin: 50px auto 30px auto;
+    padding: 2em 20px 1.6em 20px;
+    background-color: rgba(255, 255, 255, .5);
+    border-radius: 5px;
+    border: 1px solid #E87363;
+    max-width: 600px;
+    position: relative;
+}
+.available-letters .header {
+    margin-top: -16px;
+    margin-left: -100px;
+    width: 200px;
+    padding: 4px 10px 5px 10px;
+    font-size: 1em;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    border-radius: 50px;
+    border: 1px solid #E87363;
+    background-color: #fff;
+}
 .letter-display {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     max-width: 550px;
-    margin: 2em auto;
+    margin: auto;
     padding: 0;
     list-style: none;
     text-align: center;

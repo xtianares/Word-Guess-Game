@@ -99,6 +99,8 @@ function gameInit() {
     document.querySelector('.need-hint').style.display = "none";
     document.querySelector('#show-hint').style.display = "inline";
     document.querySelector('.the-hint').style.display = "none";
+    document.querySelector('.letter-display').style.display = "flex";
+    document.querySelector('.win-lose').style.display = "none";
     // removing guessed class to the selected letter
     for(var i = 0; i < letterDivs.length; i++) {
         letterDivs[i].classList.remove("guessed");
@@ -138,8 +140,10 @@ function checkLetter(letter) {
             document.querySelector('.remaining-guesses').innerHTML = guesses;
             //console.log(guessedLetters);
             if (guesses === 0) {
-                loss();            }
+                loss();
+            }
         }
+        // display hint trigger if the guessesRemaining low
         if (guesses <= 5) {
             document.querySelector('.need-hint').style.display = "block";
         }
@@ -151,20 +155,30 @@ function checkLetter(letter) {
 function win() {
     wins++;
     document.querySelector('.win-count').innerHTML = wins;
-    var audio = new Audio('assets/sounds/win.mp3');
+    let audio = new Audio('assets/sounds/win.mp3');
     audio.play();
+    let winner = `<h2 class="h1 mb-0">You Win!</h2>
+                <p class="mb-0">Starting a new game...</p>`;
+    document.querySelector('.win-lose').innerHTML = winner;
+    document.querySelector('.letter-display').style.display = "none";
+    document.querySelector('.win-lose').style.display = "block";
     // adding setTimeout to allow the user to see the last letter added to the answer
     // is there a better way to do this?
     setTimeout(function() {
-        alert("YOU WIN!");
+        //alert("YOU WIN!");
         gameInit();
-    }, 50);
+    }, 2500);
 }
 function loss() {
     losses++;
     document.querySelector('.loss-count').innerHTML = losses;
-    var audio = new Audio('assets/sounds/loss.mp3');
+    let audio = new Audio('assets/sounds/loss.mp3');
     audio.play();
+    let winner = `<h2 class="h1 mb-0">You Lose!</h2>
+                <p class="mb-0">Starting a new game...</p>`;
+    document.querySelector('.win-lose').innerHTML = winner;
+    document.querySelector('.letter-display').style.display = "none";
+    document.querySelector('.win-lose').style.display = "block";
     // per suggestion from my son display the correct answer
     let answer = '';
     for(var i = 0; i < theState.length; i++) {
@@ -178,9 +192,9 @@ function loss() {
     // adding setTimeout to allow the user to see the last letter guessed
     // is there a better way to do this?
     setTimeout(function() {
-        alert("YOU LOSE!");
+        //alert("YOU LOSE!");
         gameInit();
-    }, 50);
+    }, 2500);
 }
 
 document.getElementById('show-hint').addEventListener('click', function (event) {
