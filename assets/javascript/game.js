@@ -151,6 +151,8 @@ function checkLetter(letter) {
 function win() {
     wins++;
     document.querySelector('.win-count').innerHTML = wins;
+    var audio = new Audio('assets/sounds/win.mp3');
+    audio.play();
     // adding setTimeout to allow the user to see the last letter added to the answer
     // is there a better way to do this?
     setTimeout(function() {
@@ -161,6 +163,8 @@ function win() {
 function loss() {
     losses++;
     document.querySelector('.loss-count').innerHTML = losses;
+    var audio = new Audio('assets/sounds/loss.mp3');
+    audio.play();
     // per suggestion from my son display the correct answer
     let answer = '';
     for(var i = 0; i < theState.length; i++) {
