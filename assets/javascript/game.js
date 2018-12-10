@@ -143,7 +143,7 @@ function checkLetter(letter) {
                 loss();
             }
         }
-        // display hint trigger if the guessesRemaining low
+        // display hint trigger if the guessesRemaining is low
         if (guesses <= 5) {
             document.querySelector('.need-hint').style.display = "block";
         }
@@ -197,6 +197,7 @@ function loss() {
     }, 2500);
 }
 
+// trigger to show the hint
 document.getElementById('show-hint').addEventListener('click', function (event) {
     event.preventDefault();
     document.querySelector('#show-hint').style.display = "none";
