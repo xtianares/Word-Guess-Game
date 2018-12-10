@@ -1,2 +1,2 @@
 # Word-Guess-Game
-A stab on the clasic "Hangman" game. 
+A stab on the classic "Hangman" game. 
