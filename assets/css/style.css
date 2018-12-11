@@ -23,11 +23,58 @@ body {
     max-width: 1230px;
 }
 @keyframes blink {
+    10% { opacity: 1; }
     50% { opacity: 0; }
+}
+@keyframes bounceIn {
+  from,
+  20%,
+  40%,
+  60%,
+  80%,
+  to {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  0% {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+  20% {
+    -webkit-transform: scale3d(1.1, 1.1, 1.1);
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
+  40% {
+    -webkit-transform: scale3d(0.9, 0.9, 0.9);
+    transform: scale3d(0.9, 0.9, 0.9);
+  }
+  60% {
+    opacity: 1;
+    -webkit-transform: scale3d(1.03, 1.03, 1.03);
+    transform: scale3d(1.03, 1.03, 1.03);
+  }
+  80% {
+    -webkit-transform: scale3d(0.97, 0.97, 0.97);
+    transform: scale3d(0.97, 0.97, 0.97);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: scale3d(1, 1, 1.5);
+    transform: scale3d(1, 1, 1.5);
+  }
+}
+.bounce-in {
+  -webkit-animation-duration: 0.75s;
+  animation-duration: 0.75s;
+  -webkit-animation-name: bounceIn;
+  animation-name: bounceIn;
+  /* animation-iteration-count: infinite; */
 }
 .get-started {
     animation: blink 1.5s ease-in infinite;
 }
+
 h1 {
     font-family: Fruktur,Pacifico, "Kumar One Outline", "Roboto Slab", cursive;
     font-size: 3rem;
@@ -53,7 +100,7 @@ h3{
     text-align: center;
 }
 .current-word div.letter {
-    min-width: 30px;
+    min-width: 35px;
     min-height: 45px;
     margin: 5px;
     line-height: 40px;
@@ -99,16 +146,18 @@ h3{
     display: inline-block;
     margin: 0 20px;
 }
-.win-count, .loss-count {
+.win-count, .loss-count, .remaining-guesses {
     display: inline-block;
-    width: 20px;
+    min-width: 30px;
+    padding: 0 5px;
     text-align: center;
     border-bottom: 1px solid #E87363;
+    border-radius: 3px;
 }
 .available-letters {
-    margin: 50px auto 30px auto;
+    margin: 50px auto 15px auto;
     padding: 2em 20px 1.6em 20px;
-    background-color: rgba(255, 255, 255, .5);
+    background-color: rgba(255, 255, 255, .35);
     border-radius: 5px;
     border: 1px solid #E87363;
     max-width: 600px;
@@ -147,6 +196,7 @@ h3{
     border-radius: 3px;
     background: #E87363;
     color: #fff;
+    cursor: pointer;
 }
 .letter-display .guessed {
     line-height: 28px;
