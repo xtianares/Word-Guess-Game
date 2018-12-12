@@ -25,6 +25,7 @@ body {
 @keyframes blink {
     10% { opacity: 1; }
     50% { opacity: 0; }
+    100% { opacity:1 }
 }
 @keyframes bounceIn {
   from,
@@ -75,6 +76,9 @@ body {
     animation: blink 1.5s ease-in infinite;
 }
 
+img.driving {
+    max-width: 250px;
+}
 h1 {
     font-family: Fruktur,Pacifico, "Kumar One Outline", "Roboto Slab", cursive;
     font-size: 3rem;

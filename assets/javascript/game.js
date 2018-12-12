@@ -51,6 +51,8 @@ const stateList = [
     { state : "Wyoming", capital : "Cheyenne" }
 ];
 
+const alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+
 let wins = 0,
     losses = 0,
     guesses = 10,
@@ -62,7 +64,7 @@ let wins = 0,
     correctLetters = [],
     currentStateDivs = "";
 
-let letterDivs = document.querySelectorAll('.letter-display div');
+let letterDivs = "";
 
 const game = {
     // function to select and display current word
@@ -73,7 +75,7 @@ const game = {
         //theState = "Massachusettes"; // word use for testing
         theState = theState.toUpperCase();
     	console.log("The State is: " + theState);
-        // creating the divs per letter
+        // creating the divs per letter to be guessed
         for(var i = 0; i < theState.length; i++) {
             if (theState[i] === ' ') {
                 charDiv += '<div class="letter space"></div>';
@@ -103,9 +105,19 @@ const game = {
         document.querySelector('.letter-display').style.display = "flex";
         document.querySelector('.win-lose').style.display = "none";
         // removing guessed class to the selected letter
-        for(var i = 0; i < letterDivs.length; i++) {
-            letterDivs[i].classList.remove("guessed");
+        //let newDivs = document.querySelectorAll('.letter-display div');
+        document.querySelector('.letter-display').innerHTML = "";
+        for(var i = 0; i < alphabet.length; i++) {
+            let div = document.createElement("div");
+                div.innerHTML = alphabet[i];
+            //newDivs += div;
+            document.querySelector('.letter-display').appendChild(div);
         }
+        letterDivs = document.querySelectorAll('.letter-display div');
+        // removing guessed class to the selected letter
+        // for(var i = 0; i < letterDivs.length; i++) {
+        //     letterDivs[i].classList.remove("guessed");
+        // }
         // automatically adding 'space' to the correctLetters array
         for(var i = 0; i < theState.length; i++) {
             if (theState.charAt(i) === ' ') {
@@ -223,7 +235,7 @@ document.onkeyup = function(event) {
             }
         }
         else {
-            alert("Press a letter!");
+            //alert("Press a letter!");
         }
     }
 }
@@ -232,6 +244,9 @@ document.onkeyup = function(event) {
 document.addEventListener('click', function (event) {
     if (!Element.prototype.matches) {
     	Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
+    }
+    if (newGame) {
+        game.init();
     }
 	// If the clicked element doesn't have the right selector, bail
 	if (!event.target.matches('.letter-display div')) {
