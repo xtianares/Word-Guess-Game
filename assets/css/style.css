@@ -27,6 +27,9 @@ body {
     50% { opacity: 0; }
     100% { opacity:1 }
 }
+#header-wrapper {
+    overflow: hidden !important;
+}
 .blink {
     animation: blink 1.5s ease-in infinite;
 }
