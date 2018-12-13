@@ -1,2 +1,2 @@
 # Word-Guess-Game
-A stab on the classic "Hangman" game using US states as the keywords. A fun alternative tool for kids to help with memorizing all the US states and their capital.
+A stab on the classic "Hangman" game using US states as the keywords. Can be a fun alternative way for kids to remember all the US states and their capital.
