@@ -9,7 +9,7 @@ body {
     font-family: 'Open Sans', 'Trebuchet MS', Verdana, Arial, Helvetica, sans-serif;
     text-rendering: optimizeLegibility;
     color: #E87363;
-    background: #B4D0B7;
+    background: #FDFCFA;
     background-image: url(../images/us-map.jpg);
     background-size: cover;
     background-position: 50% 50%;
@@ -27,64 +27,31 @@ body {
     50% { opacity: 0; }
     100% { opacity:1 }
 }
-@keyframes bounceIn {
-  from,
-  20%,
-  40%,
-  60%,
-  80%,
-  to {
-    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-  }
-  0% {
-    opacity: 0;
-    -webkit-transform: scale3d(0.3, 0.3, 0.3);
-    transform: scale3d(0.3, 0.3, 0.3);
-  }
-  20% {
-    -webkit-transform: scale3d(1.1, 1.1, 1.1);
-    transform: scale3d(1.1, 1.1, 1.1);
-  }
-  40% {
-    -webkit-transform: scale3d(0.9, 0.9, 0.9);
-    transform: scale3d(0.9, 0.9, 0.9);
-  }
-  60% {
-    opacity: 1;
-    -webkit-transform: scale3d(1.03, 1.03, 1.03);
-    transform: scale3d(1.03, 1.03, 1.03);
-  }
-  80% {
-    -webkit-transform: scale3d(0.97, 0.97, 0.97);
-    transform: scale3d(0.97, 0.97, 0.97);
-  }
-  to {
-    opacity: 1;
-    -webkit-transform: scale3d(1, 1, 1.5);
-    transform: scale3d(1, 1, 1.5);
-  }
-}
-.bounce-in {
-  -webkit-animation-duration: 0.75s;
-  animation-duration: 0.75s;
-  -webkit-animation-name: bounceIn;
-  animation-name: bounceIn;
-  /* animation-iteration-count: infinite; */
-}
-.get-started {
+.blink {
     animation: blink 1.5s ease-in infinite;
 }
-
+.animated-wrap {
+    max-height: 100%;
+    transition: max-height .5s;
+}
+.animated-wrap.hidden {
+    max-height: 0;
+}
 img.driving {
+    display: inline-block;
     max-width: 250px;
 }
+h4 {
+    font-family: Fruktur, Pacifico, "Kumar One Outline", "Roboto Slab", cursive;
+    font-size: 1.7rem;
+    letter-spacing: 2px;
+}
 h1 {
-    font-family: Fruktur,Pacifico, "Kumar One Outline", "Roboto Slab", cursive;
+    font-family: Fruktur, Pacifico, "Kumar One Outline", "Roboto Slab", cursive;
     font-size: 3rem;
     letter-spacing: 3px;
 }
-h3{
+h3 {
     font-family: "Roboto Slab", cursive;
     letter-spacing: 1px;
 }
@@ -207,4 +174,7 @@ h3{
     background-color: transparent;
     border: 1px solid #E87363;
     color: #E87363;
+}
+.win-lose.animated {
+  animation-iteration-count: infinite;
 }

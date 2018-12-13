@@ -56,39 +56,50 @@ const alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M
 let wins = 0,
     losses = 0,
     guesses = 10,
-    theState = "",
+    currentState = "",
     theCapital = "",
     charDiv = "",
     newGame = true,
+    gameOver = false,
+    usedStates = [],
     guessedLetters = [],
     correctLetters = [],
-    currentStateDivs = "";
-
-let letterDivs = "";
+    currentStateDivs = "",
+    letterDivs = "";
 
 const game = {
     // function to select and display current word
     currentWord: function() {
         let randomNumber = Math.floor(Math.random() * stateList.length);
-        theState = stateList[randomNumber].state;
+        currentState = stateList[randomNumber].state;
         theCapital = stateList[randomNumber].capital;
-        //theState = "Massachusettes"; // word use for testing
-        theState = theState.toUpperCase();
-    	console.log("The State is: " + theState);
-        // creating the divs per letter to be guessed
-        for(var i = 0; i < theState.length; i++) {
-            if (theState[i] === ' ') {
-                charDiv += '<div class="letter space"></div>';
-            } else {
-                charDiv += '<div class="letter"></div>';
-            }
+        // making sure that the states are not repeated
+        if (usedStates.includes(currentState) && usedStates.length != stateList.length) {
+            this.currentWord();
         }
-        document.querySelector('.current-word').innerHTML = charDiv;
-        document.querySelector('.capital').innerHTML = theCapital;
+        else {
+            usedStates.push(currentState);
+            if (usedStates.length == stateList.length) {
+                gameOver = true;
+            }
+            //currentState = "Massachusettes"; // word use for testing
+            currentState = currentState.toUpperCase();
+            console.log("The State is: " + currentState);
+            // creating the divs per letter to be guessed
+            for(var i = 0; i < currentState.length; i++) {
+                if (currentState[i] === ' ') {
+                    charDiv += '<div class="letter space"></div>';
+                } else {
+                    charDiv += '<div class="letter"></div>';
+                }
+            }
+            document.querySelector('.current-word').innerHTML = charDiv;
+            document.querySelector('.capital').innerHTML = theCapital;
+        }
     },
     init: function() {
         guesses = 10,
-        theState = "",
+        currentState = "",
         charDiv = "",
         guessedLetters = [],
         correctLetters = [];
@@ -114,13 +125,9 @@ const game = {
             document.querySelector('.letter-display').appendChild(div);
         }
         letterDivs = document.querySelectorAll('.letter-display div');
-        // removing guessed class to the selected letter
-        // for(var i = 0; i < letterDivs.length; i++) {
-        //     letterDivs[i].classList.remove("guessed");
-        // }
         // automatically adding 'space' to the correctLetters array
-        for(var i = 0; i < theState.length; i++) {
-            if (theState.charAt(i) === ' ') {
+        for(var i = 0; i < currentState.length; i++) {
+            if (currentState.charAt(i) === ' ') {
                 correctLetters.push(' ');
             }
         }
@@ -136,19 +143,19 @@ const game = {
                     letterDivs[i].classList.add("guessed");
                 }
             }
-            for(var i = 0; i < theState.length; i++) {
-                if (theState.charAt(i) === letter) {
+            for(var i = 0; i < currentState.length; i++) {
+                if (currentState.charAt(i) === letter) {
                     currentStateDivs[i].innerHTML = letter;
                     correctLetters.push(letter);
-                    //console.log("Letter in word: " + theState.charAt(i));
+                    //console.log("Letter in word: " + currentState.charAt(i));
                 }
             }
             // tracking number of wins
-            if (theState.length === correctLetters.length) {
+            if (currentState.length === correctLetters.length) {
                 this.win();
             }
             // tracking number of guesses left
-            if (theState.indexOf(letter) < 0) {
+            if (currentState.indexOf(letter) < 0) {
                 guesses--;
                 document.querySelector('.remaining-guesses').innerHTML = guesses;
                 //console.log(guessedLetters);
@@ -175,11 +182,15 @@ const game = {
         document.querySelector('.win-lose').innerHTML = winner;
         document.querySelector('.letter-display').style.display = "none";
         document.querySelector('.win-lose').style.display = "block";
-        // adding setTimeout to allow the user to see the last letter added to the answer
-        // is there a better way to do this?
+        // adding setTimeout to allow the user to see the last letter added to the answer before reinitializing the game
         setTimeout(function() {
             //alert("YOU WIN!");
-            game.init();
+            if (!gameOver) {
+                game.init();
+            }
+            else {
+                game.end();
+            }
         }, 2500);
     },
     loss: function() {
@@ -194,20 +205,35 @@ const game = {
         document.querySelector('.win-lose').style.display = "block";
         // per suggestion from my son display the correct answer
         let answer = '';
-        for(var i = 0; i < theState.length; i++) {
-            if (theState[i] === ' ') {
+        for(var i = 0; i < currentState.length; i++) {
+            if (currentState[i] === ' ') {
                 answer += '<div class="letter space"></div>';
             } else {
-                answer += '<div class="letter space">'+ theState[i] +'</div>';
+                answer += '<div class="letter space">'+ currentState[i] +'</div>';
             }
         }
         document.querySelector('.current-word').innerHTML = answer;
-        // adding setTimeout to allow the user to see the last letter guessed
-        // is there a better way to do this?
+        // adding setTimeout to allow the user to see the last letter guessed before reinitializing the game
         setTimeout(function() {
             //alert("YOU LOSE!");
-            game.init();
+            if (!gameOver) {
+                game.init();
+            }
+            else {
+                game.end();
+            }
         }, 3500);
+    },
+    end: function() {
+        document.querySelector('.main-title').innerHTML = "Game Over!";
+        document.querySelector('#game-wrap').innerHTML = "<p class='guesses'>Too much driving...</p>";
+    },
+    start: function() {
+        document.querySelector('.road-trip').classList.remove("bounceInRight");
+        document.querySelector('.road-trip').classList.add("bounceOutLeft");
+        document.querySelector('.driving').classList.remove("bounceInLeft");
+        document.querySelector('.driving').classList.add("bounceOutRight");
+        document.querySelector('.animated-wrap').classList.add("hidden");
     }
 }
 
@@ -221,7 +247,11 @@ document.getElementById('show-hint').addEventListener('click', function (event) 
 document.onkeyup = function(event) {
     // checking if it's a new game, if not don't initialize the game on onkeyup
     if (newGame) {
-        game.init();
+        game.start();
+        // addind setTimeout to allow for animation to finish
+        setTimeout(function() {
+            game.init();
+        }, 700);
     }
     else {
         // Check if the key is a letter
@@ -246,7 +276,11 @@ document.addEventListener('click', function (event) {
     	Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
     }
     if (newGame) {
-        game.init();
+        game.start();
+        // addind setTimeout to allow for animation to finish
+        setTimeout(function() {
+            game.init();
+        }, 700);
     }
 	// If the clicked element doesn't have the right selector, bail
 	if (!event.target.matches('.letter-display div')) {
@@ -256,5 +290,5 @@ document.addEventListener('click', function (event) {
     if (guesses > 0) {
         game.checkLetter(event.target.innerText.toUpperCase());
     }
-	console.log(event.target);
+	//console.log(event.target);
 }, false);
